@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
+import { Switch} from 'react-router-dom';
 
 import HeaderBar from './header-bar';
 import LandingPage from './landing-page';
@@ -9,6 +10,11 @@ import Add from './Add';
 import RegistrationPage from './registration-page';
 import {refreshAuthToken} from '../actions/auth';
 import Poo from './Poo';
+import Home from '../containers/HomePage'
+import Room from '../containers/RoomPage'
+import NotFound from '../components/NotFound'
+import styles from '../app.css'
+
 
 export class App extends React.Component {
     componentDidMount() {
@@ -57,6 +63,12 @@ export class App extends React.Component {
                 <Route exact path="/register" component={RegistrationPage} />
                 <Route exact path="/add" component={Add} />
                 <Route exact path="/poo" component={Poo} />
+			<Switch>
+				<Route exact path="/" component={Home} />
+				<Route path="/r/:room" component={Room} />
+				<Route path="*" component={NotFound} />
+			</Switch>
+                
             </div>
         );
     }
