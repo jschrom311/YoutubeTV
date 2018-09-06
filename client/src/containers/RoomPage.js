@@ -12,7 +12,8 @@ class RoomPage extends Component {
       audio: true,
       video: true
     }).catch(e => alert('getUserMedia() error: ' + e.name))
-    this.socket = io.connect("http://localhost:8080");
+    ///this.socket = io.connect("http://localhost:8080");
+    this.socket = io.connect("https://immense-bastion-86429.herokuapp.com/");
   }
   componentDidMount() {
     this.props.addRoom();

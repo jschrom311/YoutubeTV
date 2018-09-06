@@ -5,9 +5,16 @@
   "devDependencies": {
     "react-scripts": "0.9.5"
   },
+    "homepage": "https://Tzikas.github.io/video",
+    "scripts":{
+    "predeploy": "yarn run build",
+"deploy": "gh-pages -b master -d build",
+    }
+    
   "dependencies": {
     "axios": "^0.17.1",
     "base64-js": "^1.2.1",
+    "gh-pages": "^1.2.0",
     "jwt-decode": "^2.2.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
