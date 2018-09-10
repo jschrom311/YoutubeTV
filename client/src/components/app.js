@@ -63,11 +63,8 @@ export class App extends React.Component {
                 <Route exact path="/register" component={RegistrationPage} />
                 <Route exact path="/add" component={Add} />
                 <Route exact path="/poo" component={Poo} />
-			<Switch>
-				<Route exact path="/" component={Home} />
 				<Route path="/r/:room" component={Room} />
 				<Route path="*" component={NotFound} />
-			</Switch>
                 
             </div>
         );

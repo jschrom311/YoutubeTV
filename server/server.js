@@ -100,15 +100,17 @@ io.sockets.on('connection', socket => {
     const url = socket.request.headers.referer.split('/');
     room = url[url.length - 1];
     const sr = io.sockets.adapter.rooms[room];
+    console.log("sr", sr)
     if (sr === undefined) {
       // no room with such name is found so create it
       socket.join(room);
       socket.emit('create');
-    } else if (sr.length === 1) {
+    } else {
       socket.emit('join');
-    } else { // max two clients
-      socket.emit('full', room);
-    }
+    } //else { // max two clients
+      //socket.emit('full', room);
+    //}
+    console.log(room);
   });
   socket.on('auth', data => {
     data.sid = socket.id;

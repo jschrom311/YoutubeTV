@@ -19,6 +19,11 @@ export const receivedData = data => ({
     data
 });
 
+export const FIND_DATA = 'FIND_DATA';
+export const findData = data => ({
+    type: FIND_DATA,
+});
+
 export const fetchProtectedData = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     return fetch(`${API_BASE_URL}/protected`, {
@@ -39,6 +44,8 @@ export const fetchProtectedData = () => (dispatch, getState) => {
 //const YOUTUBE_URL = "https://www.googleapis.com/youtube/v3/search";
 export const getDataFromApi = (searchTerm) => (dispatch, getState) => {
     console.log(searchTerm)
+    console.log(getState());
+    dispatch(findData());
   var url = new URL("https://www.googleapis.com/youtube/v3/search")
     var query = {
         part: 'snippet',

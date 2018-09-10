@@ -4,6 +4,7 @@ import CommunicationContainer from './CommunicationContainer'
 import { connect } from 'react-redux'
 import store from '../store'
 import io from 'socket.io-client'
+import Poo from '../components/Poo'
 
 class RoomPage extends Component {
   constructor(props) {
@@ -12,8 +13,8 @@ class RoomPage extends Component {
       audio: true,
       video: true
     }).catch(e => alert('getUserMedia() error: ' + e.name))
-    ///this.socket = io.connect("http://localhost:8080");
-    this.socket = io.connect("https://immense-bastion-86429.herokuapp.com/");
+    this.socket = io.connect("http://localhost:8080");
+    //this.socket = io.connect("https://immense-bastion-86429.herokuapp.com/");
   }
   componentDidMount() {
     this.props.addRoom();
@@ -21,6 +22,7 @@ class RoomPage extends Component {
   render(){
     return (
       <div>
+        <Poo />
         <MediaContainer media={media => this.media = media} socket={this.socket} getUserMedia={this.getUserMedia} />
         <CommunicationContainer socket={this.socket} media={this.media} getUserMedia={this.getUserMedia} />
       </div>

@@ -11,9 +11,9 @@ export class Poo extends React.Component {
         super(props);
     
         this.state = {
-          videoId: videoIdA,
+          //videoId: this.props.videoId,
           player: null,
-          channel: 0,
+          channel: this.props.channel,
         };
     
         this.onReady = this.onReady.bind(this);
@@ -36,9 +36,12 @@ export class Poo extends React.Component {
       }
       
         onReady(event) {
-          console.log(`YouTube Player object for videoId: "${this.state.videoId}" has been saved to state.`); // eslint-disable-line
+          console.log(`YouTube Player object for videoId: "${this.state.videoId}" has been saved to state.`);
+          console.log(this);
           this.setState({
             player: event.target,
+            channel: 0,
+            videoId: this.state.videoId,
           });
         }
       
@@ -75,8 +78,6 @@ export class Poo extends React.Component {
           };
         const movies = this.props.clips.map((item, i) =>
         <YouTube
-            //onReady={(event) => this.setPlayer(this.state, i)}
-            //onPlay={() => this.pauseOtherPlayers(i)}
             videoId= {item.id.videoId}
             opts={opts}
             key ={i}
@@ -87,7 +88,7 @@ export class Poo extends React.Component {
             <div>Poo
                 <div className= 'search'>
                 {this.state.channel}
-                <YouTube videoId={this.state.videoId} onReady={this.onReady} />
+                {this.props.loading? "Loading... ":<YouTube videoId={this.state.videoId} onReady={this.onReady} />}
                 <button onClick={this.onPlayVideo}>Play</button>
                 <button onClick={this.onPauseVideo}>Pause</button>
                 <button onClick={()=>{this.onChangeVideo(-1)}}>Previous</button>
@@ -99,7 +100,7 @@ export class Poo extends React.Component {
                         onClick={this.handleClick}
                         />
                 </div>
-                {movies}{this.props.name}
+                {/*{movies}{this.props.name}*/}
             </div>
         )
     }
@@ -110,7 +111,8 @@ const mapStateToProps = state => ({
     loggedIn: state.auth.currentUser !== null,
     name: 'Josh',
     clips: state.protectedData.clips,
-    players: state.protectedData.players
+    players: state.protectedData.players,
+    loading: state.protectedData.loading,
 });
 
 export default connect(mapStateToProps)(Poo);
